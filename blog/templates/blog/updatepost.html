@@ -1,0 +1,27 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="col-sm-10">
+<h3 class="my-5"> Dashboard / Edit Post </h3>
+
+<form action = "" method = "post" novalidate>
+        {% csrf_token %}
+    {% for field in form %}
+        <fieldset class="control-group">
+            <label class="control-label" for="id_{{ field.name }}">{{ field.label }}</label>
+            <div class="controls">
+                {{ field }}
+                <p class="help-text">{{ field.help_text }} </p>
+            </div>
+        </fieldset>
+    {% endfor %}
+    <input type="submit" value="update" class = "btn btn-success" >
+    <a href = "{% url 'dashboard' %}" class = "btn btn-danger"> Cancel </a>   
+</form>
+</div>
+
+{% endblock content %}
+
+
+

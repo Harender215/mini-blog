@@ -1,0 +1,28 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="col-sm-10 my-5" style="background-color: blue;">
+    <h3> signup</h3>
+</div>
+
+<div class="container md-6">
+    <form action="" method="post">
+        {% csrf_token %}
+        {% for fm in form %}    
+            <p>
+                {{fm.label_tag}}
+                {{fm}}
+                {{fm.errors|striptags}}
+            </p>
+        {% endfor %}
+        <input type="submit" value = "Submit">
+        {% if form.non_field_errors %}
+            {% for error in form.non_field_error %}
+            <p>{{error}}</p>
+            {% endfor %}
+        {% endif %}
+    </form>
+</div>
+
+{% endblock content %}

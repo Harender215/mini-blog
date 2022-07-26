@@ -1,0 +1,117 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+
+
+{% block msg %} 
+    {% if messages %} 
+        {% for message in messages %}
+        <div {% if message.tags %} class = "alert alert-{{message.tags}} 
+            alert-dismissible fade show" {% endif %}>
+            <strong> {{message}} </strong>
+            <button type="button" class = "close" data-dismiss="alert" aria-label = "Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        {% endfor %}
+    {% endif %}
+{% endblock msg %}
+
+
+
+{% block content %}
+
+<style>
+  @media (min-width: 1025px) {
+  .h-custom {
+  height: 110vh !important;
+  }
+
+  .success{
+    color: green
+  }
+}
+</style>
+
+<section class="h-100 h-custom" style="background-color: lavender;">
+    <div class="container py-5 h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-lg-8 col-xl-6">
+          <div class="card rounded-3">
+            {% load static %}
+            <img src="{% static '/Almora1.jpg' %}" class="w-100" style="border-top-left-radius: .3rem; border-top-right-radius: .3rem;"
+            alt="Sample photo" alt="My image">
+            <div class="card-body p-4 p-md-5">
+              <h3 class="mb-4 pb-2 pb-md-0 mb-md-5 px-md-2">Register Here</h3>
+  
+              <form method="post" action = "" class="px-md-2">
+                {% csrf_token %}
+                
+                <div class="form-outline mb-4">
+                    {{form.username.label}}
+                    {{form.username}}
+                    {{form.username.errors|striptags}}
+
+                    {{form.first_name.label}}
+                    {{form.first_name}}
+
+                    {{form.last_name.label}}
+                    {{form.last_name}}
+                  
+                    {{form.email.label}}
+                    {{form.email}}
+                    
+                    {{form.password1.label}}
+                    {{form.password1}}
+
+                    {{form.password2.label}}
+                    {{form.password2}}
+
+                    {% if form.non_field_errors %}
+                    {% for error in form.non_field_error %}
+                    <p>{{error}}</p>
+                    {% endfor %}
+                    {% endif %}
+        
+                    <button type="submit" class="btn btn-success btn-lg mb-1 my-2">Submit</button> 
+                  </div>
+              </form>
+              <a href = "{% url 'login' %}" style="text-decoration: none; "> existing user then login </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  {% endblock %}
+
+
+
+
+
+
+{% comment %} {% block content %}
+
+<div class="col-sm-10 my-5" style="background-color: blue;">
+    <h3> signup</h3>
+</div>
+
+<div class="container md-6">
+    <form action="" method="post">
+        {% csrf_token %}
+        {% for fm in form %}    
+            <p>
+                {{fm.label_tag}}
+                {{fm}}
+                {{fm.errors|striptags}}
+            </p>
+        {% endfor %}
+        <input type="submit" value = "Submit">
+        {% if form.non_field_errors %}
+            {% for error in form.non_field_error %}
+            <p>{{error}}</p>
+            {% endfor %}
+        {% endif %}
+    </form>
+</div>
+
+{% endblock content %} {% endcomment %}
